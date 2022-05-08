@@ -1,3 +1,6 @@
+# docker build -t cloudrun ./
+# docker run -d -p 8080:80 cloudrun
+
 FROM python:3.9-buster as base
 
 WORKDIR /opt/app
@@ -14,4 +17,4 @@ COPY --from=base /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 WORKDIR /opt/app
 COPY . /opt/app
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+CMD exec gunicorn --bind :80 --workers 1 --threads 8 --timeout 0 app:app
